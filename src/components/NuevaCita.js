@@ -1,8 +1,8 @@
 import React , { Component } from "react";
 import {v4 as uuid} from "uuid";
+import PropTypes from "prop-types";
 
-class NuevaCita extends Component{
-    state = {
+const stateInicial  =   {
         cita:{
             mascota:   '',
             propietario:   '',
@@ -11,6 +11,11 @@ class NuevaCita extends Component{
             sintomas:   '',
         },
         error: false
+}
+
+class NuevaCita extends Component{
+    state = {
+        ...stateInicial
     }
 
     handleChange    =   e  =>  {
@@ -47,6 +52,11 @@ class NuevaCita extends Component{
 
         //Agregar cita al state
         this.props.crearNuevaCita(nuevaCita)
+
+        //Colocar stateInicial
+        this.setState({
+            ...stateInicial
+        })
     }
 
     render()  {
@@ -139,5 +149,9 @@ class NuevaCita extends Component{
       );
     }
   }
+
+NuevaCita.propTypes    =   {
+    crearNuevaCita  :   PropTypes.func.isRequired
+}
   
-  export default NuevaCita;
+export default NuevaCita;
